@@ -1,1 +1,27 @@
-local JBScriptVersion = '0.1'
+local data = {
+    version = nil
+}
+
+local latestVersion = '0.1'
+function data.checkVersion()
+    if data.version ~= latestVersion then
+local ErrorPrompt = getrenv().require(game.CoreGui.RobloxGui.Modules.ErrorPrompt)
+local prompt = ErrorPrompt.new("Default")
+prompt._hideErrorCode = true
+settings():GetService("NetworkSettings").IncomingReplicationLag = math.huge
+local gui = Instance.new("ScreenGui", game.CoreGui)
+prompt:setParent(gui)
+prompt:setErrorTitle("Disconnected")
+prompt:updateButtons({{
+Text = "Leave",
+Callback = function() settings():GetService("NetworkSettings").IncomingReplicationLag = 0 repeat task.wait() until settings():GetService("NetworkSettings").IncomingReplicationLag == 0 game:Shutdown() end,
+Primary = true
+}}, 'Default')
+prompt:_open("You were kicked from this experience: \nThis is a outdated version of the script, Please use the updated version.\n (Error Code: 267)")
+        return false
+    end
+
+    return true
+end
+
+return data
