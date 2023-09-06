@@ -1,5 +1,5 @@
 local data = {
-    version = nil
+    version = '0.1'
 }
 
 local latestVersion = '0.1'
