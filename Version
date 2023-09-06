@@ -1,11 +1,11 @@
 local data = {
-    version = nil
+    version = '0.1'
 }
 
-local latest = '0.1'
-local latest2 = '0.1'
+local latest = data.version
+local latest2 = data.version
 function data.checkVersion()
-    if data.version ~= latest and data.version ~= latestBeta2 then
+    if data.version ~= latest and data.version ~= latest2 then
        local ErrorPrompt = getrenv().require(game.CoreGui.RobloxGui.Modules.ErrorPrompt)
 local prompt = ErrorPrompt.new("Default")
 prompt._hideErrorCode = true
