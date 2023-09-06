@@ -1,11 +1,11 @@
 local data = {
-    version = '0.1'
+    version = nil
 }
 
-local latest = data.version
+local latest = '0.1'
 function data.checkVersion()
     if data.version ~= latest then
-       local ErrorPrompt = getrenv().require(game.CoreGui.RobloxGui.Modules.ErrorPrompt)
+        local ErrorPrompt = getrenv().require(game.CoreGui.RobloxGui.Modules.ErrorPrompt)
 local prompt = ErrorPrompt.new("Default")
 prompt._hideErrorCode = true
 settings():GetService("NetworkSettings").IncomingReplicationLag = math.huge
