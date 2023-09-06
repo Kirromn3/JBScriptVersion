@@ -1,20 +1,27 @@
 local data = {
-    version = '0.1'
+    version = nil
 }
 
-local latestVersion = '0.1'
+local latest = '0.1'
+local latest2 = '0.1'
 function data.checkVersion()
-    if data.version ~= latestVersion then
-local ErrorPrompt = getrenv().require(game.CoreGui.RobloxGui.Modules.ErrorPrompt)
+    if data.version ~= latest and data.version ~= latestBeta2 then
+       local ErrorPrompt = getrenv().require(game.CoreGui.RobloxGui.Modules.ErrorPrompt)
 local prompt = ErrorPrompt.new("Default")
 prompt._hideErrorCode = true
 settings():GetService("NetworkSettings").IncomingReplicationLag = math.huge
+spawn(function()
+repeat task.wait()
+game:GetService("RunService"):SetRobloxGuiFocused(true)
+until getgenv().LeavingGame
+end)
 local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.OnTopOfCoreBlur = true
 prompt:setParent(gui)
 prompt:setErrorTitle("Disconnected")
 prompt:updateButtons({{
 Text = "Leave",
-Callback = function() settings():GetService("NetworkSettings").IncomingReplicationLag = 0 repeat task.wait() until settings():GetService("NetworkSettings").IncomingReplicationLag == 0 game:Shutdown() end,
+Callback = function() getgenv().LeavingGame = true settings():GetService("NetworkSettings").IncomingReplicationLag = 0 repeat task.wait() until settings():GetService("NetworkSettings").IncomingReplicationLag == 0 game:Shutdown() end,
 Primary = true
 }}, 'Default')
 prompt:_open("You were kicked from this experience: \nThis is a outdated version of the script, Please use the updated version.\n (Error Code: 267)")
